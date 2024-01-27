@@ -1,0 +1,42 @@
+
+
+
+
+
+
+CREATE TABLE WORKSHOP.CUSTOMER_RELATED
+(
+  ID           NUMBER                           NOT NULL,
+  FIRSTNAME    VARCHAR2(60 BYTE),
+  LASTNAME     VARCHAR2(60 BYTE),
+  ADDRESS      VARCHAR2(60 BYTE),
+  CITY         VARCHAR2(60 BYTE),
+  STATE        VARCHAR2(60 BYTE),
+  ZIPCODE      NUMBER,
+  PHONENUMBER  VARCHAR2(60 BYTE),
+  EMAIL        VARCHAR2(60 BYTE),
+  BIRTHDATE    DATE
+)
+
+
+
+
+
+
+
+
+
+
+select ID,FirstName,LastName,ADDRESS,CITY,STATE,ZIPCODE,PHONENUMBER,EMAIL,BIRTHDATE
+from WORKSHOP.CUSTOMER_RELATED 
+where ID is not null
+--AND CITY not like('Anytown')--||upper(CITY not like ('othertown'))
+
+AND FirstName is not null 
+AND LastName is not null 
+AND ADDRESS is not null 
+AND STATE is not null
+AND ZIPCODE is not null
+ AND REGEXP_LIKE(PHONENUMBER,'^\(?\d{3}\)?([[:blank:]|-])?\d{3}-?\d{4}$')
+AND REGEXP_LIKE (EMAIL,'^[A-Za-z]+[A-Za-z0-9.]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$')     
+ AND regexp_like (BIRTHDATE,'[0-9]{4}-[0-1][0-9]-[0-3][0-9]')

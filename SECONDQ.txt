@@ -1,0 +1,80 @@
+INSERT INTO WORKSHOP.L2_SERVICES (ORDER_TYPE,
+                                  --PRODUCT_TYPE,
+                                  DIM_GROUP_ID,
+                                  ORDER_NO,
+                                  DIM_BOOKINGDATE_ID,
+                                  DIM_STORE_ID,
+                                  SERVICE_FEE_CODE,
+                                  --PRODUCT_CODE,
+                                  DIM_CUSTOMER_ID,
+                                  DIM_LANGUAGE,
+                                  DIM_TOTALS_CURRENCY,
+                                  DIM_STATUS_ID,
+                                  PHONE,
+                                  PAYMENT_AMOUNT,
+                                  DISCOUNT_AMOUNT,
+                                 SERVICE_FEE_AMOUNT,
+                                  BASE_AMOUNT,
+                                  INPUTVAT,
+                                  OUTPUTVAT,
+                                  PRODUCT_VAT,
+                                  SELLING_PRICE,
+                                  SELLING_PRICE_VAT,
+                                  IBV,
+                                  IOV_USD,
+                                  GBV,
+                                  GBV_USD)
+   (SELECT ORDER_TYPE,
+         --  PRODUCT_TYPE,
+           DIM_GROUP_ID,
+           ORDER_NO,
+           DIM_BOOKINGDATE_ID,
+           DIM_STORE_ID,
+           --AHS_GROUP_NAME,
+           --PRODUCT_CODE,
+           DIM_CUSTOMER_ID,
+           DIM_LANGUAGE,
+           DIM_TOTALS_CURRENCY,
+           DIM_STATUS_ID,
+           PHONE,
+           PAYMENT_AMOUNT,
+           DISCOUNT_AMOUNT,
+           0,
+           BASE_AMOUNT,
+           INPUTVAT,
+           OUTPUTVAT,
+           PRODUCT_VAT,
+           SELLING_PRICE,
+           SELLING_PRICE_VAT,
+           IBV,
+           IBV*CONVERSION_RATE_USD,
+           GBV,
+          GBV * CONVERSION_RATE_USD
+         
+      FROM WORKSHOP.L1_SERVICES A
+      WHERE A.PRODUCT_TYPE=A.ORDER_TYPE
+      
+      );
+      
+      
+      
+      
+      
+      
+      UPDATE  WORKSHOP.L2_SERVICES SET (SERVICE_FEE_CODE)=
+      (SELECT DISTINCT PRODUCT_NAME
+      FROM WORKSHOP.L1_SERVICES 
+      WHERE PRODUCT_TYPE='rule'
+  
+)
+
+
+
+
+
+
+
+
+
+
+
